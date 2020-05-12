@@ -151,6 +151,10 @@ fun withGlobalExceptionHandling(block: () -> Int) {
                 }
                 exitProcess(1)
             }
+            is FlankConfigurationException ->{
+                System.err.println(t)
+                exitProcess(1)
+            }
             is FTLError -> {
                 t.matrix.logError("not finished")
                 exitProcess(3)
@@ -159,6 +163,7 @@ fun withGlobalExceptionHandling(block: () -> Int) {
                 System.err.println(t.message)
                 exitProcess(2)
             }
+
             // We need to cover the case where some component in the call stack starts a non-daemon
             // thread, and then throws an Error that kills the main thread. This is extra safe implementation
             else -> {

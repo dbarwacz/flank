@@ -32,8 +32,6 @@ class AndroidArgsFileTest {
     val systemOutRule = SystemOutRule().muteForSuccessfulTests()!!
 
     private val localYamlFile = getPath("src/test/kotlin/ftl/fixtures/flank.local.yml")
-    private val yamlWithProblematicDeviceParams =
-        getPath("src/test/kotlin/ftl/fixtures/test_app_cases/flank-multiple-failed-parsing.yml")
     private val gcsYamlFile = getPath("src/test/kotlin/ftl/fixtures/flank.gcs.yml")
     private val appApkLocal = getString("../test_app/apks/app-debug.apk")
     private val appApkGcs = "gs://tmp_bucket_2/app-debug.apk"
@@ -194,8 +192,4 @@ class AndroidArgsFileTest {
         assertEquals(60 * 60 * 1000L, args.parsedTimeout)
     }
 
-    @Test
-    fun `parse file with problematic device params`() {
-        AndroidArgs.load(yamlWithProblematicDeviceParams)
-    }
 }

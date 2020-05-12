@@ -4,6 +4,7 @@ gcloud:
   device:
     - model: NexusLowRes
       version: 23
+      orientation: landscape
     - model: NexusLowRes
       version: 23
       orientation: landscape
@@ -13,12 +14,12 @@ gcloud:
       orientation: default
       # Google Pixel 3
     - model: blueline
-      version: 29
+      version: 28
       locale: en
       orientation: portrait
       # Samsung Galaxy S9 SM-G9600
     - model: starqltechn
-      verison: 26
+      versxion: 28
       locale: en
       orientation: portrait
       # LG Nexus 5
