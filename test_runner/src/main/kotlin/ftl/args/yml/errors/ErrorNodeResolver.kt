@@ -1,10 +1,9 @@
 package ftl.args.yml.errors
 
 import com.fasterxml.jackson.databind.JsonNode
-import javax.swing.tree.TreeNode
 
-class ErrorNodeResolver {
-    operator fun invoke(treeNode: JsonNode, errorModel: ConfigErrorModel): String {
+internal class ErrorNodeResolver {
+    operator fun invoke(treeNode: JsonNode, errorModel: ConfigurationErrorModel): String {
         var currentNode: JsonNode = treeNode
 
         val lastNode = errorModel.referenceChain.last()

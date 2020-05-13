@@ -1,8 +1,7 @@
 package ftl.args.yml
 
-import com.fasterxml.jackson.core.JsonProcessingException
-import com.fasterxml.jackson.databind.JsonMappingException
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 
@@ -11,7 +10,9 @@ class YamlObjecMapper() : ObjectMapper(YAMLFactory()) {
         try {
             return readValue(content, _typeFactory.constructType(valueType))
         } catch (missingParameterError: MissingKotlinParameterException) {
-            throw convertMissingParameterException(missingParameterError, readTree(content))
+            throw convertConfigurationErrorExceptions(missingParameterError, readTree(content))
+        } catch (mismatchedInputException: MismatchedInputException) {
+            throw convertConfigurationErrorExceptions(mismatchedInputException, readTree(content))
         }
     }
 }

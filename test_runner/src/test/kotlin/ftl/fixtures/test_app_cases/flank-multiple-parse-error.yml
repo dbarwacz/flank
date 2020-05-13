@@ -3,7 +3,6 @@ gcloud:
   test: ./src/test/kotlin/ftl/fixtures/tmp/apk/app-single-success-debug-androidTest.apk
   device:
     - model: NexusLowRes
-      version: 23
       orientation: landscape
     - model: NexusLowRes
       version: 23
@@ -19,7 +18,7 @@ gcloud:
       orientation: portrait
       # Samsung Galaxy S9 SM-G9600
     - model: starqltechn
-      versxion: 28
+      version: 28
       locale: en
       orientation: portrait
       # LG Nexus 5

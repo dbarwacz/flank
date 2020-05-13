@@ -1,6 +1,6 @@
 package ftl.args.yml.errors
 
-internal class ErrorParser {
+internal class ConfigurationErrorParser {
 
     //region regex patterns
     private val propertyNameRegex = "(?<=property\\s)[a-z]*".toRegex()
@@ -9,10 +9,9 @@ internal class ErrorParser {
     private val lineAndColumnRegex = "((?<=line:\\s)\\d*), column:\\s(\\d*)".toRegex()
     //endregion
 
-
-    operator fun invoke(errorMessage: String): ConfigErrorModel {
+    operator fun invoke(errorMessage: String): ConfigurationErrorModel {
         val (line, column) = parseErrorPositionLine(errorMessage)
-        return ConfigErrorModel(
+        return ConfigurationErrorModel(
             parsePropertyName(errorMessage),
             line.toInt(),
             column.toInt(),
@@ -20,7 +19,7 @@ internal class ErrorParser {
         )
     }
 
-    private fun parsePropertyName(errorMessage: String) = propertyNameRegex.find(errorMessage)!!.value
+    private fun parsePropertyName(errorMessage: String) = propertyNameRegex.find(errorMessage)?.value ?: ""
     private fun parseErrorPositionLine(errorMessage: String) = lineAndColumnRegex.find(errorMessage)!!.destructured
 
     private fun parseReferenceChain(errorMessage: String) =

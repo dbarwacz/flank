@@ -2,12 +2,11 @@ package ftl.args.yml
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
-import ftl.args.yml.errors.ConfigErrorMessageBuilder
-import ftl.args.yml.errors.ErrorParser
+import ftl.args.yml.errors.ConfigurationErrorMessageBuilder
 import ftl.util.FlankConfigurationException
 
-fun convertMissingParameterException(missingParameterError: MissingKotlinParameterException, yaml: JsonNode): Throwable {
-    val errorMessageBuilder = ConfigErrorMessageBuilder()
+fun convertConfigurationErrorExceptions(missingParameterError: Exception, yaml: JsonNode): Throwable {
+    val errorMessageBuilder = ConfigurationErrorMessageBuilder()
     val errorMessage = missingParameterError.message
     return if (errorMessage != null) {
         FlankConfigurationException(errorMessageBuilder(errorMessage, yaml))

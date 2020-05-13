@@ -2,11 +2,12 @@ package ftl.args.yml.errors
 
 import com.fasterxml.jackson.databind.JsonNode
 import java.lang.Exception
-import javax.swing.tree.TreeNode
 
-class ConfigErrorMessageBuilder {
-    private val parseMessage = ErrorParser()
+class ConfigurationErrorMessageBuilder {
+
+    private val parseMessage = ConfigurationErrorParser()
     private val resolveErrorNode = ErrorNodeResolver()
+
     //region error message elements
     private val messageHeader = "Error on parse config: "
     private val missingElementMessage = "Missing element or value for: '%s'"
@@ -17,23 +18,19 @@ class ConfigErrorMessageBuilder {
 
     private val exceptionTemplate = "Parse message error: %s"
 
-    operator fun invoke(errorMessage: String) =
+    operator fun invoke(errorMessage: String, yamlTreeNode: JsonNode? = null) =
         try {
             val errorModel = parseMessage(errorMessage)
-            StringBuilder(messageHeader).appendln(createReferenceChain(errorModel.referenceChain)).appendln(
-                missingElementMessage.format(errorModel.propertyName)
-            ).appendln(atMessage.format(errorModel.line, errorModel.column)).toString().trim()
-        } catch (error: Exception) {
-            exceptionTemplate.format(errorMessage)
-        }
-
-    operator fun invoke(errorMessage: String, yamlTreeNode: JsonNode) =
-        try {
-            val errorModel = parseMessage(errorMessage)
-            StringBuilder(messageHeader).appendln(createReferenceChain(errorModel.referenceChain)).appendln(
-                missingElementMessage.format(errorModel.propertyName)
-            ).appendln(atMessage.format(errorModel.line, errorModel.column))
-                .appendln(errorNodeMessage.format(resolveErrorNode(yamlTreeNode, errorModel))).toString().trim()
+            val errorMessageBuilder = StringBuilder(messageHeader)
+            errorMessageBuilder.appendln(createReferenceChain(errorModel.referenceChain))
+            if (errorModel.propertyName != "") {
+                errorMessageBuilder.appendln(missingElementMessage.format(errorModel.propertyName))
+            }
+            errorMessageBuilder.appendln(atMessage.format(errorModel.line, errorModel.column))
+            yamlTreeNode?.let {
+                errorMessageBuilder.appendln(errorNodeMessage.format(resolveErrorNode(yamlTreeNode, errorModel)))
+            }
+            errorMessageBuilder.toString().trim()
         } catch (error: Exception) {
             exceptionTemplate.format(errorMessage)
         }

@@ -3,7 +3,7 @@ gcloud:
   test: ./src/test/kotlin/ftl/fixtures/tmp/apk/app-single-success-debug-androidTest.apk
   device:
     - model:
-      version: X
+      version: test
 
 flank:
   disable-sharding: true
