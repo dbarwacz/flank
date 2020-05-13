@@ -151,7 +151,7 @@ fun withGlobalExceptionHandling(block: () -> Int) {
                 }
                 exitProcess(1)
             }
-            is FlankConfigurationException ->{
+            is FlankConfigurationException -> {
                 System.err.println(t)
                 exitProcess(1)
             }
@@ -188,6 +188,9 @@ fun <R : MutableMap<String, Any>, T> mutableMapProperty(
     defaultValue: () -> T
 ) = object : ReadWriteProperty<R, T> {
     @Suppress("UNCHECKED_CAST")
-    override fun getValue(thisRef: R, property: KProperty<*>): T = thisRef.getOrElse(name ?: property.name, defaultValue) as T
-    override fun setValue(thisRef: R, property: KProperty<*>, value: T) = thisRef.set(name ?: property.name, value as Any)
+    override fun getValue(thisRef: R, property: KProperty<*>): T =
+        thisRef.getOrElse(name ?: property.name, defaultValue) as T
+
+    override fun setValue(thisRef: R, property: KProperty<*>, value: T) =
+        thisRef.set(name ?: property.name, value as Any)
 }

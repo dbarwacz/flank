@@ -87,6 +87,4 @@ Error node: {
     fun `should throw FlankConfigException without model node`() {
         AndroidArgs.load(yamlNoModelNode)
     }
-
-
 }

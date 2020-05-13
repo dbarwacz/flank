@@ -1,7 +1,6 @@
 package ftl.args
 
-import com.fasterxml.jackson.databind.*
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.google.api.client.json.GenericJson
 import com.google.api.client.json.JsonObjectParser
@@ -12,7 +11,7 @@ import com.google.cloud.storage.Storage
 import com.google.cloud.storage.StorageClass
 import com.google.cloud.storage.StorageOptions
 import ftl.args.yml.IYmlMap
-import ftl.args.yml.YamlObjecMapper
+import ftl.args.yml.YamlObjectMapper
 import ftl.config.FtlConstants
 import ftl.config.FtlConstants.GCS_PREFIX
 import ftl.config.FtlConstants.JSON_FACTORY
@@ -37,9 +36,8 @@ import java.util.regex.Pattern
 object ArgsHelper {
 
     val yamlMapper: ObjectMapper by lazy {
-        YamlObjecMapper().registerKotlinModule()
+        YamlObjectMapper().registerKotlinModule()
     }
-
 
     fun mergeYmlMaps(vararg ymlMaps: IYmlMap): Map<String, List<String>> {
         val result = mutableMapOf<String, List<String>>()

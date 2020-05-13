@@ -61,7 +61,6 @@ class FlankFatalError(message: String) : FlankException(message)
  */
 class FlankCommonException(message: String) : FlankException(message)
 
-
 /**
  *  Exception throws when required parameters is missing
  *

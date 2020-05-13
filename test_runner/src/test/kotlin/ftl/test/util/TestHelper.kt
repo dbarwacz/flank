@@ -1,7 +1,5 @@
 package ftl.test.util
 
-import ftl.util.FlankConfigurationException
-import io.ktor.features.NotFoundException
 import org.junit.Assert
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -30,7 +28,4 @@ object TestHelper {
     } catch (exception: Throwable) {
         exception
     }
-
 }
-
-class FlankTestNotFoundException(message: String) : Exception(message)

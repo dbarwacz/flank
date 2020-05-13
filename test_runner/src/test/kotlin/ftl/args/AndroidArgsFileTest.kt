@@ -191,5 +191,4 @@ class AndroidArgsFileTest {
         val args = AndroidArgs.load(localYamlFile)
         assertEquals(60 * 60 * 1000L, args.parsedTimeout)
     }
-
 }

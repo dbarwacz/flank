@@ -13,7 +13,6 @@ class ConfigurationErrorMessageBuilder {
     private val missingElementMessage = "Missing element or value for: '%s'"
     private val atMessage = "At line: %s, column: %s"
     private val errorNodeMessage = "Error node: %s"
-    private val referenceChainMessage = "Reference chain: %s"
     //endregion
 
     private val exceptionTemplate = "Parse message error: %s"
@@ -47,6 +46,5 @@ class ConfigurationErrorMessageBuilder {
         chainPart.toIntOrNull() != null -> "[$chainPart]"
         withSeparator -> "->$chainPart"
         else -> chainPart
-
     }
 }

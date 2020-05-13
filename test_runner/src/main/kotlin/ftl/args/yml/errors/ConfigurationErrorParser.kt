@@ -27,5 +27,4 @@ internal class ConfigurationErrorParser {
 
     private fun cleanUpReferenceChain(referenceChain: String): List<String> =
         referenceChainCleanUpRegex.findAll(referenceChain).map { it.value.replace("\"", "") }.toList()
-
 }
